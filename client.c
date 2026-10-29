@@ -3,8 +3,6 @@
 
      (derived from the msquic quicsample).
 
-    each new terminal requires to set BIN= "your msquic build directory" mine is BIN=~/CLionProjects/msquic/build/bin/Release
-
 --*/
 #define _CRT_SECURE_NO_WARNINGS 1
 
