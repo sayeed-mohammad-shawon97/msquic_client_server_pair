@@ -11,33 +11,12 @@ Abstract:
     request line of the form "GET /<filename>\r\n", looks the file up in
     SERVER_ROOT and sends its bytes back on the same stream followed by a FIN.
 
-    If the request is bad or the file can't be served, the server aborts its
-    send direction with an application error code instead:
-        400 malformed request, 403 unsafe file name,
-        404 file not found,    413 file too large.
-
-    Only flat file names made of letters, digits, '.', '_' and '-' (not starting
-    with '.') are served, so a client can't escape SERVER_ROOT.
-
-    Generate a self signed certificate for the lab with:
-
-        openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 \
-            -nodes -keyout key.pem -out cert.pem -days 30 \
-            -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost"
-
-    Run it from the directory that contains cert.pem, key.pem and www/.
-    each new terminal requires to set BIN= "your msquic build directory" mine is BIN=~/CLionProjects/msquic/build/bin/Release
-
 --*/
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #ifdef _WIN32
-//
-// The conformant preprocessor along with the newest SDK throws this warning for
-// a macro in C mode. As users might run into this exact bug, exclude this
-// warning here. This is not an MsQuic bug but a Windows SDK bug.
-//
+
 #pragma warning(disable:5105)
 #endif
 #include "msquic.h"
